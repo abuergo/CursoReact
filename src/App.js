@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import {NavBar} from './components/NavBar/NavBar';
+import {Footer} from './components/Footer/Footer';
+import {ItemListContainer} from './components/ItemListContainer/ItemListContainer';
+import {useState} from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Carrousel } from './components/Carrousel/Carrousel';
+import { ItemCount } from './components/ItemCount/ItemCount';
+import { PokeApi } from './ejemplos/PokeApi/PokeApi';
+import { ItemDetailContainer } from './components/ItemDetailContainer/ItemDetailContainer';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { CartView } from './components/CartView/CartView';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+        <NavBar/>
+        <Carrousel />
+
+        <Routes>
+          <Route path="/" element={<ItemListContainer/>}/>
+          <Route path="/category" element= { <ItemListContainer/> } />
+          <Route path="/detail" element={<ItemDetailContainer/>}/>
+          <Route path="/cart" element={<CartView/>}/>
+        </Routes>
+                
+        <hr/>
+
+        <PokeApi />
+        <hr/>
+        <ItemCount /> 
+        
+        <Footer />
+      </BrowserRouter>
+    ); 
 }
 
 export default App;
