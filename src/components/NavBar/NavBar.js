@@ -8,9 +8,10 @@ export const NavBar = () => {
       <header>
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">
+            <Link to = "/">
             <img src={logo} alt="logo" class="logo-hambrosio" />
-          </a>
+            </Link>
+            
           <button
             class="navbar-toggler"
             type="button"
@@ -24,14 +25,19 @@ export const NavBar = () => {
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
                 <CartWidget />
-                </li>
+                
               <li class="nav-item">
-                <Link to ="/cart" class="nav-link active px-3 link-nav-hover"> Home </Link>
+                <Link to ="/" class="nav-link active px-3 link-nav-hover"> Home </Link>
               </li>
                <li class="nav-item">
-                <Link to ="/cart" class="nav-link active px-3 link-nav-hover"> Cart </Link>
+                <Link to ="/category/shoes" class="nav-link active px-3 link-nav-hover"> Shoes </Link>
+              </li>
+               <li class="nav-item">
+                <Link to ="/category/t-shirts" class="nav-link active px-3 link-nav-hover"> T-shirts </Link>
+              </li>
+               <li class="nav-item">
+                <Link to ="/category/shorts" class="nav-link active px-3 link-nav-hover"> Shorts </Link>
               </li>
               <li class="nav-item">
                 <a class="nav-link active px-3 link-nav-hover" href="./pages/reservas.html"

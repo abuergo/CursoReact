@@ -4,7 +4,7 @@ export const useCounter = (initial = 0, max, min) => {
 
     const [counter, setCounter] = useState(initial);
 
-    const increment = () => {
+    const increment = (e) => {
         counter < max && setCounter(counter + 1);
     }
 

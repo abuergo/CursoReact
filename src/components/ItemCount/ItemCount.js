@@ -1,28 +1,28 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useCounter } from '../../hooks/useCounter'
 
-export const ItemCount = ( {stock=10, initial=0} ) => {
+export const ItemCount = ( {increment, decrement, onAdd, counter} ) => {
 
-    const {counter, increment, decrement} = useCounter(initial, stock, 0);
+    // useEffect(() => {
+    //     window.addEventListener('click', (e) => {
+    //         console.log(e)
+    //     })
+    // }, [])
+
 
     return (
-        <div className="container my-5">
-            <div className="row">
-            <h1 className ="text-center py-2">Desafio contador</h1>
+        <div className="">
+
+            <div className="container d-flex justify-content-center align-items-center">
+            <button onClick={decrement} className="btn btn-outline-primary">-</button>
+            <span className="mx-2">{counter}</span>
+            <button onClick={increment} className="btn btn-primary">+</button>
             </div>
-            
-            <div className="row">
-                <div className="col d-flex justify-content-center">
-            <button type="button" class="btn btn-dark mx-2" onClick={increment}>+</button>
-            </div>
-            
-            <div className="col d-flex justify-content-center">
-            {counter}
-            </div>
-            
-            <div className="col d-flex justify-content-center">
-            <button type="button" class="btn btn-dark mx-2" onClick={decrement}>-</button>
-            </div>
+            <div>
+
+                <div className="container">
+                <button className="btn btn-dark my-2" onClick={onAdd}>Add to cart</button>
+                </div>
             </div>
         </div>
     )

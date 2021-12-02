@@ -4,34 +4,32 @@ import {ItemListContainer} from './components/ItemListContainer/ItemListContaine
 import {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carrousel } from './components/Carrousel/Carrousel';
-import { ItemCount } from './components/ItemCount/ItemCount';
-import { PokeApi } from './ejemplos/PokeApi/PokeApi';
 import { ItemDetailContainer } from './components/ItemDetailContainer/ItemDetailContainer';
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import { CartView } from './components/CartView/CartView';
+import { CartContext, CartProvider } from './context/CartContext';
 
-function App() {
-
+function App() {  
   return (
-    <BrowserRouter>
-        <NavBar/>
-        <Carrousel />
 
-        <Routes>
-          <Route path="/" element={<ItemListContainer/>}/>
-          <Route path="/category" element= { <ItemListContainer/> } />
-          <Route path="/detail" element={<ItemDetailContainer/>}/>
-          <Route path="/cart" element={<CartView/>}/>
-        </Routes>
-                
-        <hr/>
+    <CartProvider>
+      <BrowserRouter>
+          <NavBar/>
+          {/* <Carrousel /> */}
 
-        <PokeApi />
-        <hr/>
-        <ItemCount /> 
-        
-        <Footer />
-      </BrowserRouter>
+          <Routes>
+            <Route path="/" element={<ItemListContainer/>}/>
+            <Route path="/category/:categoryId" element= { <ItemListContainer/> } />
+            <Route path="/detail/:itemId" element={<ItemDetailContainer/>}/>
+            <Route path="/cart" element={<CartView/>}/>
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>   
+          <hr/>
+          <Footer />
+        </BrowserRouter>
+
+    </CartProvider>
+
     ); 
 }
 
