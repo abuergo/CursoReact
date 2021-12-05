@@ -7,7 +7,7 @@ import { useCounter } from '../../hooks/useCounter'
 import { CartContext } from '../../context/CartContext'
 
 export const ItemDetail = ({item}) => {
-    const {counter, increment, decrement} = useCounter(1, item.stock, 0);
+    const {counter, increment, decrement} = useCounter(1, item.stock, 1);
 
     const navigate = useNavigate()
 
@@ -47,7 +47,10 @@ export const ItemDetail = ({item}) => {
                         increment={increment} 
                         decrement={decrement}
                         onAdd={handleAgregar} 
-                        counter={counter} />
+                        counter={counter} 
+                        min = {1}
+                        max = {item.stock}
+                        />
                         </div>
                         :      <div className="row my-3">
                         <Link to="/cart" className="btn btn-success">Buy now</Link>

@@ -6,16 +6,20 @@ import {BsFillTrashFill} from 'react-icons/bs'
 export const CartView = () => {
     const {cart, vaciarCarrito, totalCompra, removerDelCarrito} = useContext(CartContext);
 
-    return (
-        <div className="container my-5">
-            {   cart.length === 0
-                ?  <> 
+    // return si no hay elementos en el carrito
+    if(cart.length === 0){
+        return (
+                    <> 
                         <h2>Your cart is empty</h2>
                         <hr/>
                         <Link to="/" className="btn btn-dark">Go back</Link>
                    </>
+        )
+    }
 
-                :  <>
+    // return de la vista normal
+    return (
+        <div className="container my-5">
                 <h2>Cart View</h2>
                 <hr/> 
 
@@ -31,18 +35,9 @@ export const CartView = () => {
                 }
 
                 <hr/>
-
                 <h4> Total: ${totalCompra()} </h4>
-
                 <button onClick={vaciarCarrito} className="btn btn-danger">Empty cart</button>
-                <Link to="/checkout" className="btn btn-success mx-3">Go to checkout</Link>
-                    </>
-
-            }
-
-
-
-            
+                <Link to="/checkout" className="btn btn-success mx-3">Go to checkout</Link>            
         </div>
     )
 }

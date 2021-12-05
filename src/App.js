@@ -8,14 +8,27 @@ import { ItemDetailContainer } from './components/ItemDetailContainer/ItemDetail
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import { CartView } from './components/CartView/CartView';
 import { CartContext, CartProvider } from './context/CartContext';
+import { Popover, PopoverTrigger, PopoverContent, PopoverCloseButton } from './components/Popover/Popover';
 
 function App() {  
+
+  
   return (
 
     <CartProvider>
       <BrowserRouter>
           <NavBar/>
           {/* <Carrousel /> */}
+
+          <Popover>
+            <PopoverTrigger>Abrir popover</PopoverTrigger>
+            <PopoverContent>Contenido popover usando Compound components</PopoverContent>
+            <PopoverCloseButton />
+          </Popover>
+
+
+
+
 
           <Routes>
             <Route path="/" element={<ItemListContainer/>}/>

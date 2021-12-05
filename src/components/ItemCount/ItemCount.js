@@ -1,22 +1,25 @@
 import React, {useState, useEffect} from 'react'
 import { useCounter } from '../../hooks/useCounter'
 
-export const ItemCount = ( {increment, decrement, onAdd, counter} ) => {
+export const ItemCount = ( {increment, decrement, onAdd, counter, min, max} ) => {
 
-    // useEffect(() => {
-    //     window.addEventListener('click', (e) => {
-    //         console.log(e)
-    //     })
-    // }, [])
+    const btnRestarConfig = {
+        onClick: decrement,
+        className: `btn ${counter === min ? "btn-outline-danger" : "btn-outline-primary"}`
+    }
 
-
+    const btnSumarConfig = {
+        onClick: increment, 
+        className: `btn ${counter === max ? "btn-outline-danger" : "btn-outline-primary"}`
+    }
+    
     return (
         <div className="">
 
             <div className="container d-flex justify-content-center align-items-center">
-            <button onClick={decrement} className="btn btn-outline-primary">-</button>
+            <button {...btnRestarConfig}>-</button>
             <span className="mx-2">{counter}</span>
-            <button onClick={increment} className="btn btn-primary">+</button>
+            <button {...btnSumarConfig}>+</button>
             </div>
             <div>
 
