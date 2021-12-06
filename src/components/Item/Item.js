@@ -13,7 +13,7 @@ export const Item = ({item}) => {
                 <p className ="text-center">Price: ${item.precio}</p>
                 <p className ="text-center">{item.descuento}</p>
 
-                <p className ="text-center">Categoria:{item.category}</p>
+                <p className ="text-center">Category: {item.category}</p>
 
                 <div className="col text-center">
                 <Link to={`/detail/${item.id}`} className="btn btn-primary">See more</Link>

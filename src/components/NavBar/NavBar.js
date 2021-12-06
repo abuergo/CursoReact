@@ -40,12 +40,12 @@ export const NavBar = () => {
                 <Link to ="/category/shorts" class="nav-link active px-3 link-nav-hover"> Shorts </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link active px-3 link-nav-hover" href="./pages/reservas.html"
+                <a class="nav-link active px-3 link-nav-hover disabled" href="./pages/reservas.html"
                   >Find a store</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link active px-3 link-nav-hover" href="./pages/contacto.html"
+                <a class="nav-link active px-3 link-nav-hover disabled" href="./pages/contacto.html"
                   >Contact Us</a
                 >
               </li>

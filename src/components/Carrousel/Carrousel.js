@@ -1,5 +1,5 @@
 import React from 'react'
-import imagenPrincipal1 from './ImagenesCarrousel/Principal.jpeg'
+import imagenPrincipal1 from './ImagenesCarrousel/Principal2.jpg'
 // import imagenPrincipal2 from './ImagenesCarrousel/0-principal(2).jpg'
 // import imagenPrincipal3 from './ImagenesCarrousel/0-principal(3).jpg'
 

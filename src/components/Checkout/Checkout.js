@@ -3,25 +3,26 @@ import { CartContext } from '../../context/CartContext'
 import { Timestamp, collection, addDoc, doc, getDocs, updateDoc, writeBatch, query, where, documentId} from 'firebase/firestore/lite'
 import { db } from '../../firebase/config'
 import { Link } from 'react-router-dom'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
 
-
+const schema = Yup.object().shape({
+    nombre: Yup.string()
+    .required('This field is required')
+    .max(30, 'Name is too long'),
+    apellido: Yup.string()
+    .required('This field is required')
+    .min(2, 'Last name should be at least 3 characters long'),
+    email: Yup.string()
+    .email("Invalid email")
+    .required("This field is required")
+})
 
 export const Checkout = () => {
 
     const [orderId, setOrderId] = useState(null)
     const {cart, totalCompra, vaciarCarrito} = useContext(CartContext)
-
-
-    const [values, setValues] = useState({
-        nombre: '',
-        apellido: '',
-        email: '', 
-        tel: ''
-    })
-
     const [nombre, setNombre] = useState('')
-
-
 
     const generarOrden = (buyer) => {
         const order = {
@@ -70,22 +71,22 @@ export const Checkout = () => {
 
     const ordersRef = collection(db, 'orders')
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
 
-        if(values.nombre.length > 4 && values.email.length > 5){
-            generarOrden(values)
-        } else {
-            alert("Please fill in all of the fields")
-        }
-    }
+    //     if(values.nombre.length > 4 && values.email.length > 5){
+    //         generarOrden(values)
+    //     } else {
+    //         alert("Please fill in all of the fields")
+    //     }
+    // }
 
-    const handleInputChange = (e) => {
-        setValues({
-            ...values, 
-            [e.target.name]: e.target.value
-        })
-    }
+    // const handleInputChange = (e) => {
+    //     setValues({
+    //         ...values, 
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
     return (
         <div className="container my-5">                
@@ -100,49 +101,73 @@ export const Checkout = () => {
                             </>
                         :
                             <>
-                                <h2>Summary</h2>
+                                <h2>Checkout</h2>
+
+                                <p>Please fill out the required fields (*) to finish purchase </p>
                                 <hr/>
 
 
-                                <form onSubmit = {handleSubmit}>
+                                <Formik 
+                                    initialValues = {{
+                                        nombre: '',
+                                        apellido: '',
+                                        email: '', 
+                                        tel: ''
+                                    }}
+                                    validationSchema = {schema}
+                                    onSubmit = {(values) => {
+                                        console.log(values)
+
+                                        generarOrden(values)
+                                    }}
+                                >
+
+                                    {(formik) => (
+                                        
+                                        <form onSubmit = {formik.handleSubmit}>
                                     <input
-                                        value = {values.nombre}
-                                        onChange = {handleInputChange}
+                                        value = { formik.values.nombre }
+                                        onChange = {formik.handleChange}
                                         name = "nombre"
                                         className = "form-control my-2"
-                                        placeholder = "First name"
+                                        placeholder = "First name (*)"
                                         type = "text"  
                                     /> 
+                                    { formik.touched.nombre && formik.errors.nombre && <p className="alert alert-danger">{formik.errors.nombre}</p>}
                                     <input
-                                        value = {values.apellido}
-                                        onChange = {handleInputChange}
+                                        value = {formik.values.apellido}
+                                        onChange = {formik.handleChange}
                                         name = "apellido"
                                         className = "form-control my-2"
-                                        placeholder = "Last name"
+                                        placeholder = "Last name (*)"
                                         type = "text" 
                                     />
+                                    {formik.touched.apellido && formik.errors.apellido && <p className="alert alert-danger">{formik.errors.apellido}</p>}
+
                                     <input
-                                        value = {values.email}
-                                        onChange = {handleInputChange}
+                                        value = {formik.values.email}
+                                        onChange = {formik.handleChange}
                                         name = "email"
                                         className = "form-control my-2"
-                                        placeholder = "Email"
+                                        placeholder = "Email (*)"
                                         type = "text" 
                                     />
+                                    {formik.touched.email && formik.errors.email && <p className="alert alert-danger">{formik.errors.email}</p>}
+
                                     <input
-                                        value = {values.tel}
-                                        onChange = {handleInputChange}
+                                        value = {formik.values.tel}
+                                        onChange = {formik.handleChange}
                                         name = "tel"
                                         className = "form-control my-2"
                                         placeholder = "Phone"
                                         type = "text" 
                                     />
-
                                     <button className="btn btn-danger" type="submit">Finish</button>
-
                                 </form>
+                                        
+                                    )}
 
-
+                                </Formik>
                             </>
                 }       
             <hr/>
