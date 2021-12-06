@@ -6,17 +6,46 @@ import { ItemList } from '../ItemList/ItemList';
 import { Loader } from '../Loader/Loader';
 import {collection, getDocs, query, where} from 'firebase/firestore/lite'
 import { db } from '../../firebase/config';
+import { useSelector, useDispatch   } from 'react-redux';
 
 export const ItemListContainer = (  ) => {
         
-    const {usuario} = useContext(CartContext)
-    
+    const store = useSelector(state => state)
+    const dispatch = useDispatch()
+    console.log(store)
+
+    const {usuario} = useContext(CartContext)    
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const {categoryId} = useParams();
 
     useEffect(() => {
+    
+        dispatch({
+            type : 'ADD_ITEM', 
+            payload: {
+                id: 1,
+                nombre: "item de prueba"
+            }
+        } )
+    
+        dispatch({
+            type : 'ADD_ITEM', 
+            payload: {
+                id: 2,
+                nombre: "item de prueba"
+            }
+        } )
+    
+        dispatch({
+            type : 'DELETE_ITEM', 
+            payload: 2
+        } )
+
+        dispatch({
+            type: 'EMPTY_CART'
+        })
     
         setLoading(true);
 

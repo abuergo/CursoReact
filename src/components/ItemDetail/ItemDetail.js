@@ -8,14 +8,9 @@ import { CartContext } from '../../context/CartContext'
 
 export const ItemDetail = ({item}) => {
     const {counter, increment, decrement} = useCounter(1, item.stock, 1);
-
     const navigate = useNavigate()
-
     const { agregarAlCarrito, isInCart } = useContext(CartContext)
-
-
         
-
     const handleGoBack = () => {
         navigate(-1)
     }

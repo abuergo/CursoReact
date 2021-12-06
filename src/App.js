@@ -8,25 +8,21 @@ import { ItemDetailContainer } from './components/ItemDetailContainer/ItemDetail
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import { CartView } from './components/CartView/CartView';
 import { CartContext, CartProvider } from './context/CartContext';
-import { Popover, PopoverTrigger, PopoverContent, PopoverCloseButton } from './components/Popover/Popover';
+import { Checkout } from './components/Checkout/Checkout';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 function App() {  
 
   
   return (
 
+    <Provider store = {store}>
+
     <CartProvider>
       <BrowserRouter>
           <NavBar/>
           {/* <Carrousel /> */}
-
-          <Popover>
-            <PopoverTrigger>Abrir popover</PopoverTrigger>
-            <PopoverContent>Contenido popover usando Compound components</PopoverContent>
-            <PopoverCloseButton />
-          </Popover>
-
-
 
 
 
@@ -35,6 +31,7 @@ function App() {
             <Route path="/category/:categoryId" element= { <ItemListContainer/> } />
             <Route path="/detail/:itemId" element={<ItemDetailContainer/>}/>
             <Route path="/cart" element={<CartView/>}/>
+            <Route path="/checkout" element={<Checkout/>}/>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>   
           <hr/>
@@ -43,6 +40,8 @@ function App() {
 
     </CartProvider>
 
+
+    </Provider>
     ); 
 }
 
